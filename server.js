@@ -48,8 +48,21 @@ const PORT = process.env.PORT || 5050;
 
 // Middleware
 // Allows frontend to communicate with backend
-app.use(cors({ origin: 'https://myofascialawakening.com' }));
-app.use(cors({ origin: 'https://consciousbirthdoula.com' }));
+const allowedOrigins = [
+  'https://myofascialawakening.com',
+  'https://consciousbirthdoula.com',
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
 app.use(bodyParser.json()); // Parses incoming JSON data
 
 // Email sending route
