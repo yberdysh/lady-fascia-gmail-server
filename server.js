@@ -47,7 +47,9 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 // Middleware
-app.use(cors({ origin: 'https://myofascialawakening.com' })); // Allows frontend to communicate with backend
+// Allows frontend to communicate with backend
+app.use(cors({ origin: 'https://myofascialawakening.com' }));
+app.use(cors({ origin: 'https://consciousbirthdoula.com' }));
 app.use(bodyParser.json()); // Parses incoming JSON data
 
 // Email sending route
